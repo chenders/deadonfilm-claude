@@ -10,6 +10,8 @@ import type {
   CursedMoviesFiltersResponse,
   CursedActorsResponse,
   ActorProfileResponse,
+  ActorSearchResponse,
+  ConnectionResponse,
 } from "@/types"
 
 const API_BASE = "/api"
@@ -134,4 +136,19 @@ export function getProfileUrl(
 
 export async function getActor(actorId: number): Promise<ActorProfileResponse> {
   return fetchJson(`/actor/${actorId}`)
+}
+
+// Six Degrees of Death API
+export async function searchActors(query: string): Promise<ActorSearchResponse> {
+  if (!query || query.length < 2) {
+    return { results: [] }
+  }
+  return fetchJson(`/search-actors?q=${encodeURIComponent(query)}`)
+}
+
+export async function getConnection(
+  actorAId: number,
+  actorBId: number
+): Promise<ConnectionResponse> {
+  return fetchJson(`/connection/${actorAId}/${actorBId}`)
 }

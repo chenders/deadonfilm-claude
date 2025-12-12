@@ -289,6 +289,13 @@ export default function ActorPage() {
                   Wikipedia
                 </a>
               )}
+              <Link
+                to={`/six-degrees?from=${actor.id}`}
+                className="rounded-full bg-accent px-3 py-1.5 text-xs text-cream transition-colors hover:bg-accent/80"
+                data-testid="find-connection-link"
+              >
+                Find Connection To...
+              </Link>
             </div>
           </div>
         </div>

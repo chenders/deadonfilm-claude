@@ -221,3 +221,57 @@ export interface ActorProfileResponse {
   costarStats: ActorCostarStats | null
   deathInfo: ActorDeathInfo | null
 }
+
+// Six Degrees of Death types
+export interface ActorSearchResult {
+  id: number
+  name: string
+  profilePath: string | null
+  knownFor: string[]
+}
+
+export interface ActorSearchResponse {
+  results: ActorSearchResult[]
+}
+
+export interface PathActor {
+  id: number
+  name: string
+  profilePath: string | null
+  isDeceased: boolean
+}
+
+export interface PathMovie {
+  id: number
+  title: string
+  year: number | null
+  posterPath: string | null
+}
+
+export interface PathSegment {
+  actor: PathActor
+  movie: PathMovie | null
+}
+
+export interface DeceasedOnPath {
+  id: number
+  name: string
+  deathday: string | null
+  causeOfDeath: string | null
+  ageAtDeath: number | null
+}
+
+export interface ConnectionResult {
+  found: true
+  degrees: number
+  path: PathSegment[]
+  totalDeceased: number
+  deceasedOnPath: DeceasedOnPath[]
+}
+
+export interface ConnectionNotFound {
+  found: false
+  message: string
+}
+
+export type ConnectionResponse = ConnectionResult | ConnectionNotFound

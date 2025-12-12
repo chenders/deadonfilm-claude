@@ -60,6 +60,14 @@ export default function QuickActions() {
         </Link>
         <span className={tooltipClass}>Actors with unusually high co-star mortality</span>
       </div>
+
+      <div className="group relative">
+        <Link data-testid="six-degrees-btn" to="/six-degrees" className={linkClass}>
+          <span className="text-sm">🔗</span>
+          Six Degrees
+        </Link>
+        <span className={tooltipClass}>Find connections between actors through shared movies</span>
+      </div>
     </div>
   )
 }

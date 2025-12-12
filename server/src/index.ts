@@ -13,6 +13,7 @@ import { getDiscoverMovie, getCursedMovies, getCursedMoviesFilters } from "./rou
 import { getStats, getRecentDeathsHandler } from "./routes/stats.js"
 import { getCursedActorsRoute } from "./routes/actors.js"
 import { getActor } from "./routes/actor.js"
+import { searchActorsRoute, getConnectionRoute } from "./routes/six-degrees.js"
 import { initializeDatabase } from "./lib/startup.js"
 
 const app = express()
@@ -50,6 +51,8 @@ app.get("/api/stats", getStats)
 app.get("/api/recent-deaths", getRecentDeathsHandler)
 app.get("/api/cursed-actors", getCursedActorsRoute)
 app.get("/api/actor/:id", getActor)
+app.get("/api/search-actors", searchActorsRoute)
+app.get("/api/connection/:actorAId/:actorBId", getConnectionRoute)
 
 // Initialize database and start server
 async function startServer() {

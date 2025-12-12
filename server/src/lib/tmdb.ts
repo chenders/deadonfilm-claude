@@ -23,6 +23,27 @@ export interface TMDBSearchResponse {
   total_results: number
 }
 
+export interface TMDBPersonSearchResult {
+  id: number
+  name: string
+  profile_path: string | null
+  known_for_department: string
+  popularity: number
+  known_for: Array<{
+    id: number
+    title?: string
+    name?: string
+    media_type: string
+  }>
+}
+
+export interface TMDBPersonSearchResponse {
+  page: number
+  results: TMDBPersonSearchResult[]
+  total_pages: number
+  total_results: number
+}
+
 export interface TMDBMovie {
   id: number
   title: string
@@ -135,6 +156,11 @@ export async function searchMovies(query: string): Promise<TMDBSearchResponse> {
     total_pages: page1.total_pages,
     total_results: page1.total_results,
   }
+}
+
+export async function searchPerson(query: string): Promise<TMDBPersonSearchResponse> {
+  const url = `/search/person?query=${encodeURIComponent(query)}&include_adult=false&language=en-US&page=1`
+  return tmdbFetch<TMDBPersonSearchResponse>(url)
 }
 
 export async function getMovieDetails(movieId: number): Promise<TMDBMovieDetails> {
